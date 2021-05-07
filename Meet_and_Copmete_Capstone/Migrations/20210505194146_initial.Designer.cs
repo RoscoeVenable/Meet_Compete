@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Meet_and_Copmete_Capstone.Data.Migrations
+namespace Meet_and_Copmete_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210427210102_Initial")]
-    partial class Initial
+    [Migration("20210505194146_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,87 @@ namespace Meet_and_Copmete_Capstone.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Meet_and_Copmete_Capstone.Models.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EventPlannerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventPlannerId");
+
+                    b.ToTable("Event");
+                });
+
+            modelBuilder.Entity("Meet_and_Copmete_Capstone.Models.EventPlaner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LoginEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("EventPlaner");
+                });
+
+            modelBuilder.Entity("Meet_and_Copmete_Capstone.Models.Eventee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LoginEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Eventee");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -50,15 +131,15 @@ namespace Meet_and_Copmete_Capstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8c291cd4-c4de-467f-bab2-8dd7ba629484",
-                            ConcurrencyStamp = "b7212190-2b52-428f-8977-67b94576f354",
+                            Id = "98f59591-1229-491d-beaa-05fa39c0f047",
+                            ConcurrencyStamp = "caf2cdf3-4031-44c1-bb0f-d5a034b8b436",
                             Name = "Eventee",
                             NormalizedName = "EVENTEE"
                         },
                         new
                         {
-                            Id = "c2aab026-4cbd-4967-bcc7-a20dbc1ed360",
-                            ConcurrencyStamp = "55c5aaff-0785-40f2-93fa-a00959187198",
+                            Id = "9b28bb38-6d91-4825-946b-c1c69031d2d8",
+                            ConcurrencyStamp = "e49e3419-6cb3-4bf7-a1a9-15005e6ae479",
                             Name = "EventPlaner",
                             NormalizedName = "EVENTPLANER"
                         });
@@ -231,6 +312,35 @@ namespace Meet_and_Copmete_Capstone.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Meet_and_Copmete_Capstone.Models.Event", b =>
+                {
+                    b.HasOne("Meet_and_Copmete_Capstone.Models.EventPlaner", "EventPlaner")
+                        .WithMany()
+                        .HasForeignKey("EventPlannerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EventPlaner");
+                });
+
+            modelBuilder.Entity("Meet_and_Copmete_Capstone.Models.EventPlaner", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
+
+                    b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("Meet_and_Copmete_Capstone.Models.Eventee", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
+
+                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Meet_and_Copmete_Capstone.Models;
 
 namespace Meet_and_Copmete_Capstone.Data
 {
@@ -33,6 +34,9 @@ namespace Meet_and_Copmete_Capstone.Data
             }
             );
         }
+        public DbSet<Meet_and_Copmete_Capstone.Models.Eventee> Eventee { get; set; }
+        public DbSet<Meet_and_Copmete_Capstone.Models.Event> Event { get; set; }
+        public DbSet<Meet_and_Copmete_Capstone.Models.EventPlaner> EventPlaner { get; set; }
 
     }
 }
