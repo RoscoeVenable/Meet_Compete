@@ -1,4 +1,5 @@
-﻿using Meet_and_Copmete_Capstone.Data;
+﻿using Meet_and_Copmete_Capstone.ActionFilters;
+using Meet_and_Copmete_Capstone.Data;
 using Meet_and_Copmete_Capstone.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Meet_and_Copmete_Capstone.Controllers
 {
+    [ServiceFilter(typeof(GlobalRouting))]
     public class EventController : Controller
     {
         private readonly ApplicationDbContext _context;
