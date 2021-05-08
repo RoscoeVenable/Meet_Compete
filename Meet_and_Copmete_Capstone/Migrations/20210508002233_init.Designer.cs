@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Meet_and_Copmete_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210507170424_global routing")]
-    partial class globalrouting
+    [Migration("20210508002233_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,8 +28,14 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EventPlannerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Extras")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -131,15 +137,15 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "90e22106-f064-4836-8b03-4b80877b08bd",
-                            ConcurrencyStamp = "ca21a37c-f8e3-4bf2-8ab9-339322e552d0",
+                            Id = "8ef3194b-b08b-4426-b300-2bc01841a358",
+                            ConcurrencyStamp = "1d0aa34e-e12f-4cd7-aca4-383840a9f252",
                             Name = "Eventee",
                             NormalizedName = "EVENTEE"
                         },
                         new
                         {
-                            Id = "e8e638d8-64d7-40e6-ac9d-f6f50d2141d8",
-                            ConcurrencyStamp = "f74fb9d7-a8d8-4038-b786-9a29477fa3d8",
+                            Id = "7400c9af-572f-49a5-aaac-541ffb8d5fc9",
+                            ConcurrencyStamp = "8d76dc66-0ed8-4c5b-ad7a-e9097d815124",
                             Name = "EventPlaner",
                             NormalizedName = "EVENTPLANER"
                         });

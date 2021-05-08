@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Meet_and_Copmete_Capstone.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -205,6 +205,8 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Day = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Extras = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<int>(type: "int", nullable: false),
                     EventPlannerId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -222,12 +224,12 @@ namespace Meet_and_Copmete_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "98f59591-1229-491d-beaa-05fa39c0f047", "caf2cdf3-4031-44c1-bb0f-d5a034b8b436", "Eventee", "EVENTEE" });
+                values: new object[] { "8ef3194b-b08b-4426-b300-2bc01841a358", "1d0aa34e-e12f-4cd7-aca4-383840a9f252", "Eventee", "EVENTEE" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "9b28bb38-6d91-4825-946b-c1c69031d2d8", "e49e3419-6cb3-4bf7-a1a9-15005e6ae479", "EventPlaner", "EVENTPLANER" });
+                values: new object[] { "7400c9af-572f-49a5-aaac-541ffb8d5fc9", "8d76dc66-0ed8-4c5b-ad7a-e9097d815124", "EventPlaner", "EVENTPLANER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

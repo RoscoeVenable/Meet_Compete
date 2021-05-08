@@ -26,8 +26,14 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EventPlannerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Extras")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -129,15 +135,15 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "35a70546-13b4-42e5-999c-91f49a6dcaa6",
-                            ConcurrencyStamp = "4bc6910f-012a-4093-975b-96e07062a9b7",
+                            Id = "8ef3194b-b08b-4426-b300-2bc01841a358",
+                            ConcurrencyStamp = "1d0aa34e-e12f-4cd7-aca4-383840a9f252",
                             Name = "Eventee",
                             NormalizedName = "EVENTEE"
                         },
                         new
                         {
-                            Id = "85437f3a-66c7-4604-b8de-eabf14ccbf19",
-                            ConcurrencyStamp = "d303a048-7184-47ac-a48f-0f786e3d21bd",
+                            Id = "7400c9af-572f-49a5-aaac-541ffb8d5fc9",
+                            ConcurrencyStamp = "8d76dc66-0ed8-4c5b-ad7a-e9097d815124",
                             Name = "EventPlaner",
                             NormalizedName = "EVENTPLANER"
                         });

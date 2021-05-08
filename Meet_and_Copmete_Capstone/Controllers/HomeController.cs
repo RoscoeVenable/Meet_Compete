@@ -1,5 +1,4 @@
-﻿using Meet_and_Copmete_Capstone.ActionFilters;
-using Meet_and_Copmete_Capstone.Models;
+﻿using Meet_and_Copmete_Capstone.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Meet_and_Copmete_Capstone.Controllers
 {
-    [ServiceFilter(typeof(GlobalRouting))]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

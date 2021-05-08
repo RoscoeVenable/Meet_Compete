@@ -18,11 +18,29 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Day)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Day)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Extras)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Extras)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ZipCode)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ZipCode)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EventPlaner)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EventPlaner.Id)
+        </dd class>
     </dl>
     
     <form asp-action="Delete">

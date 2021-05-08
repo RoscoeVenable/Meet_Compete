@@ -1,5 +1,4 @@
-﻿using Meet_and_Copmete_Capstone.ActionFilters;
-using Meet_and_Copmete_Capstone.Data;
+﻿using Meet_and_Copmete_Capstone.Data;
 using Meet_and_Copmete_Capstone.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Meet_and_Copmete_Capstone.Controllers
 {
-    [ServiceFilter(typeof(GlobalRouting))]
+
     public class EventController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,25 +22,23 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // GET: EventController
         public ActionResult Index()
         {
-            return View();
-            //if (_context.UserRoles = "EventPlanner")
+
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var eventPlannerLoggedIn = _context.EventPlaner.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+
+            var eventPlannerEvents = _context.Event.Where(e => e.EventPlannerId == eventPlannerLoggedIn.Id).ToList();
+
+            return View(eventPlannerEvents);
+
+            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var eventPlannerLoggedIn = _context.EventPlaner.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+
+            //if(eventPlannerLoggedIn != null)
             //{
-            //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //    var eventPlannerLoggedIn = _context.EventPlaner.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-
-            //    var eventPlannerEvents = _context.Event.Where(e => e.EventPlannerId == eventPlannerLoggedIn.Id).ToList();
-
-            //    return View(eventPlannerEvents);
+            //    return RedirectToAction("Index", "Event");
             //}
-            //else
-            //{
-            //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //    var eventeeLoggedIN = _context.Eventee.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            //return RedirectToAction("Create", "EventPlaners");
 
-            //    var eventteeEvents = _context.Event.Where(e => e.ZipCode == eventeeLoggedIN.ZipCode).ToList();
-
-            //    return View(eventteeEvents);
-            //}
         }
 
         // GET: EventController/Details/5

@@ -28,7 +28,7 @@ namespace Meet_and_Copmete_Capstone.ActionFilters
                 else if (_claimsPrincipal.IsInRole("EventPlaner"))
                 {
                     context.Result = new RedirectToActionResult("Index",
-                    "EventPlaner", null);
+                    "EventPlaners", null);
                 }
             }
         }
