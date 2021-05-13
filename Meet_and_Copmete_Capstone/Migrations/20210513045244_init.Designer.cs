@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Meet_and_Copmete_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210508002233_init")]
+    [Migration("20210513045244_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,8 +28,8 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Day")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DayOfWeek")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EventPlannerId")
                         .HasColumnType("int");
@@ -137,15 +137,15 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8ef3194b-b08b-4426-b300-2bc01841a358",
-                            ConcurrencyStamp = "1d0aa34e-e12f-4cd7-aca4-383840a9f252",
+                            Id = "7efd8c21-5725-47ca-9c6c-bb10b90cbabd",
+                            ConcurrencyStamp = "5dc924ff-951a-4fe7-88be-84012d6237f5",
                             Name = "Eventee",
                             NormalizedName = "EVENTEE"
                         },
                         new
                         {
-                            Id = "7400c9af-572f-49a5-aaac-541ffb8d5fc9",
-                            ConcurrencyStamp = "8d76dc66-0ed8-4c5b-ad7a-e9097d815124",
+                            Id = "34a57d3c-3fa8-422e-a6f4-17586d7c83d8",
+                            ConcurrencyStamp = "d19ae9c7-654b-4e60-aeca-364bb4afa811",
                             Name = "EventPlaner",
                             NormalizedName = "EVENTPLANER"
                         });

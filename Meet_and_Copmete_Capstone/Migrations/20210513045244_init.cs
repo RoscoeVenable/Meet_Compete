@@ -205,9 +205,9 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Day = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Extras = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<int>(type: "int", nullable: false),
+                    DayOfWeek = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Extras = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EventPlannerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -224,12 +224,12 @@ namespace Meet_and_Copmete_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8ef3194b-b08b-4426-b300-2bc01841a358", "1d0aa34e-e12f-4cd7-aca4-383840a9f252", "Eventee", "EVENTEE" });
+                values: new object[] { "7efd8c21-5725-47ca-9c6c-bb10b90cbabd", "5dc924ff-951a-4fe7-88be-84012d6237f5", "Eventee", "EVENTEE" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "7400c9af-572f-49a5-aaac-541ffb8d5fc9", "8d76dc66-0ed8-4c5b-ad7a-e9097d815124", "EventPlaner", "EVENTPLANER" });
+                values: new object[] { "34a57d3c-3fa8-422e-a6f4-17586d7c83d8", "d19ae9c7-654b-4e60-aeca-364bb4afa811", "EventPlaner", "EVENTPLANER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
