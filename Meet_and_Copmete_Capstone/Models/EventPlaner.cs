@@ -17,6 +17,7 @@ namespace Meet_and_Copmete_Capstone.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int ZipCode { get; set; }
+        public string Bio { get; set; }
         //public string Image { get; set; }
 
 

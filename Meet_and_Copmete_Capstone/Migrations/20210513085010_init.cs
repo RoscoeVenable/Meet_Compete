@@ -161,7 +161,9 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     LoginEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<int>(type: "int", nullable: false),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -185,6 +187,7 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<int>(type: "int", nullable: false),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -205,9 +208,12 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ZipCode = table.Column<int>(type: "int", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DayOfWeek = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Time = table.Column<int>(type: "int", nullable: false),
                     Extras = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EventType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ZipCode = table.Column<int>(type: "int", nullable: false),
                     EventPlannerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -224,12 +230,12 @@ namespace Meet_and_Copmete_Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "7efd8c21-5725-47ca-9c6c-bb10b90cbabd", "5dc924ff-951a-4fe7-88be-84012d6237f5", "Eventee", "EVENTEE" });
+                values: new object[] { "18bbe7d0-3158-4393-9589-a090b2607edd", "26ca2864-52f6-4e97-910f-f1227a96a626", "Eventee", "EVENTEE" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "34a57d3c-3fa8-422e-a6f4-17586d7c83d8", "d19ae9c7-654b-4e60-aeca-364bb4afa811", "EventPlaner", "EVENTPLANER" });
+                values: new object[] { "76907f89-d36f-4a66-b7ae-30c09f8eef9f", "1ba2ff35-c810-45b0-b50f-baf85bef36c0", "EventPlaner", "EVENTPLANER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Meet_and_Copmete_Capstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210513045244_init")]
+    [Migration("20210513085010_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,17 +28,26 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DayOfWeek")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EventPlannerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("EventType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Extras")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Time")
+                        .HasColumnType("int");
 
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
@@ -56,6 +65,9 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -85,6 +97,12 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Bio")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -137,15 +155,15 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7efd8c21-5725-47ca-9c6c-bb10b90cbabd",
-                            ConcurrencyStamp = "5dc924ff-951a-4fe7-88be-84012d6237f5",
+                            Id = "18bbe7d0-3158-4393-9589-a090b2607edd",
+                            ConcurrencyStamp = "26ca2864-52f6-4e97-910f-f1227a96a626",
                             Name = "Eventee",
                             NormalizedName = "EVENTEE"
                         },
                         new
                         {
-                            Id = "34a57d3c-3fa8-422e-a6f4-17586d7c83d8",
-                            ConcurrencyStamp = "d19ae9c7-654b-4e60-aeca-364bb4afa811",
+                            Id = "76907f89-d36f-4a66-b7ae-30c09f8eef9f",
+                            ConcurrencyStamp = "1ba2ff35-c810-45b0-b50f-baf85bef36c0",
                             Name = "EventPlaner",
                             NormalizedName = "EVENTPLANER"
                         });

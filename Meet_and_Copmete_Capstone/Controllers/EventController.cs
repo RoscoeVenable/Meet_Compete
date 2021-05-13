@@ -1,8 +1,10 @@
 ﻿using Meet_and_Copmete_Capstone.ActionFilters;
 using Meet_and_Copmete_Capstone.Data;
 using Meet_and_Copmete_Capstone.Models;
+using Meet_and_Copmete_Capstone.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +55,11 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // GET: EventController/Create
         public ActionResult EventCreate()
         {
+            List<EventTypes> eventTypes = new List<EventTypes>();
+            eventTypes.Add(new EventTypes { Value = "D&D", Text = "D&D", Selected = true});
+            eventTypes.Add(new EventTypes { Value = "Basketball", Text = "Basketball", Selected = false });
+            eventTypes.Add(new EventTypes { Value = "Warhammer", Text = "Warhammer", Selected = false });
+            ViewBag.EventTypes = new SelectList(eventTypes, "Value", "Text");
             return View();
         }
 
@@ -80,16 +87,20 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // GET: EventController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Event events = _context.Event.Where(e => e.Id == id).SingleOrDefault();
+            return View(events);
         }
 
         // POST: EventController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Event events)
         {
             try
             {
+                
+                _context.Update(events);
+                _context.SaveChanges();
                 return RedirectToAction("Index", "EventPlaners");
             }
             catch
