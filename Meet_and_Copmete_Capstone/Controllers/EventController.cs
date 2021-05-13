@@ -1,4 +1,5 @@
-﻿using Meet_and_Copmete_Capstone.Data;
+﻿using Meet_and_Copmete_Capstone.ActionFilters;
+using Meet_and_Copmete_Capstone.Data;
 using Meet_and_Copmete_Capstone.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,23 +23,25 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // GET: EventController
         public ActionResult Index()
         {
-
+            return View();
+            //if (_context.UserRoles = "EventPlanner")
+            //{
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var eventPlannerLoggedIn = _context.EventPlaner.Where(e => e.IdentityUserId == userId).SingleOrDefault();
 
             var eventPlannerEvents = _context.Event.Where(e => e.EventPlannerId == eventPlannerLoggedIn.Id).ToList();
 
             return View(eventPlannerEvents);
-
-            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var eventPlannerLoggedIn = _context.EventPlaner.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-
-            //if(eventPlannerLoggedIn != null)
-            //{
-            //    return RedirectToAction("Index", "Event");
             //}
-            //return RedirectToAction("Create", "EventPlaners");
+            //else
+            //{
+            //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //    var eventeeLoggedIN = _context.Eventee.Where(e => e.IdentityUserId == userId).SingleOrDefault();
 
+            //    var eventteeEvents = _context.Event.Where(e => e.ZipCode == eventeeLoggedIN.ZipCode).ToList();
+
+            //    return View(eventteeEvents);
+            //}
         }
 
         // GET: EventController/Details/5
@@ -48,7 +51,7 @@ namespace Meet_and_Copmete_Capstone.Controllers
         }
 
         // GET: EventController/Create
-        public ActionResult Create()
+        public ActionResult EventCreate()
         {
             return View();
         }
@@ -56,7 +59,7 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // POST: EventController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Event events)
+        public ActionResult EventCreate(Event events)
         {
             try
             {
@@ -64,9 +67,9 @@ namespace Meet_and_Copmete_Capstone.Controllers
                 var eventPlannerLoggedIn = _context.EventPlaner.Where(e => e.IdentityUserId == userId).SingleOrDefault();
 
                 events.EventPlannerId = eventPlannerLoggedIn.Id;
-                _context.Event.Add(events);
+                _context.Add(events);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "EventPlaners");
             }
             catch
             {
@@ -87,7 +90,7 @@ namespace Meet_and_Copmete_Capstone.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "EventPlaners");
             }
             catch
             {
@@ -108,7 +111,10 @@ namespace Meet_and_Copmete_Capstone.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var events = _context.Event.Find(id);
+                _context.Event.Remove(events);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "EventPlaners");
             }
             catch
             {

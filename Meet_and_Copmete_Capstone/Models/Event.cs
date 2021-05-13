@@ -12,9 +12,9 @@ namespace Meet_and_Copmete_Capstone.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime Day { get; set; }
-        public string Extras { get; set; }
         public int ZipCode { get; set; }
+        public string DayOfWeek { get; set; }
+        public string Extras { get; set; }
 
         [ForeignKey("EventPlaner")]
         public int EventPlannerId { get; set; }

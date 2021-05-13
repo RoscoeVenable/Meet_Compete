@@ -9,10 +9,11 @@ using Meet_and_Copmete_Capstone.Data;
 using Meet_and_Copmete_Capstone.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Meet_and_Copmete_Capstone.ActionFilters;
 
 namespace Meet_and_Copmete_Capstone.Controllers
 {
-   
+    [Authorize(Roles = "Eventee")]
     public class EventeesController : Controller
     {
         private readonly ApplicationDbContext _context;

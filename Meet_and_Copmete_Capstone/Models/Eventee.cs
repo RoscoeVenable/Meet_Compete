@@ -10,8 +10,8 @@ namespace Meet_and_Copmete_Capstone.Models
 {
     public class Eventee
     {
-//this is the profile
-//event inclusion
+        //this is the profile
+        //event inclusion
         [Key]
         public int Id { get; set; }
         public string LoginEmail { get; set; }
@@ -25,3 +25,4 @@ namespace Meet_and_Copmete_Capstone.Models
         public IdentityUser IdentityUser { get; set; }
     }
 }
+

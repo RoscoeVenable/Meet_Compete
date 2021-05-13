@@ -1,8 +1,6 @@
 ﻿@model Meet_and_Copmete_Capstone.Models.EventPlaner
 
-@{
-    ViewData["Title"] = "Edit";
-}
+@{ ViewData["Title"] = "Edit"; }
 
 <h1>Edit</h1>
 
@@ -38,6 +36,11 @@
                 <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId"></select>
                 <span asp-validation-for="IdentityUserId" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                    <label asp-for="File" class="control-label"></label>
+                    <input type="File" asp-for="File" class="form-control"/>
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
