@@ -1,22 +1,14 @@
 ﻿@model IEnumerable<Meet_and_Copmete_Capstone.Models.Event>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "BasketBallEvents";
 }
 
-<h1>Events Near Me</h1>
+<h1>BasketBallEvents</h1>
 
-<div class="dropdown">
-    <button class="btn btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown">
-        Current Events
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-        <li><a asp-controller="Eventees" asp-action="BasketBallEvents">Basket Ball Games</a></li>
-        <li><a asp-controller="Eventees" asp-action="DnDEvents">DnD Events</a></li>
-        <li><a asp-controller="Eventees" asp-action="WarhammerEvents">Warhammer 40K</a></li>
-    </ul>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -46,6 +38,12 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ZipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EventPlaner)
@@ -87,22 +85,9 @@
                 @Html.DisplayFor(modelItem => item.EventPlaner.FirstName)
             </td>
             <td>
-            <a asp-controller="Event" asp-action="Detail" asp-route-id="@item.Id">Details</a> |
+                <a asp-controller="Event" asp-action="Details" asp-route-id="@item.Id">Details</a> |
             </td>
         </tr>
 }
     </tbody>
 </table>
-@*<div class="row">
-    @foreach (var invite in ViewBag.invites)
-    {
-        <div class="col-12">
-            <div>@($"Name: {invite.events.eventplaner.FirstName} {invite.events.eventplaner.LastName}")</div>
-            
-            @if (true)
-            {
-                <a asp-action="AcceptInvite" className="btn btn-primary" asp-route-target=@invite.Id>Invite</a>
-            }
-        </div>
-    }
-</div>*@

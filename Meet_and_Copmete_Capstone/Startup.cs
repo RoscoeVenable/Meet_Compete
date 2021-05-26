@@ -1,9 +1,6 @@
 using Meet_and_Copmete_Capstone.ActionFilters;
 using Meet_and_Copmete_Capstone.Data;
 using Microsoft.AspNetCore.Builder;
-using Meet_and_Copmete_Capstone.ActionFilters;
-using Meet_and_Copmete_Capstone.Data;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -50,7 +47,7 @@ namespace Meet_and_Copmete_Capstone
                 config.Filters.Add(typeof(GlobalRouting));
             });
 
-
+            services.AddTransient<Geocoding>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 

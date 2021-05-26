@@ -1,10 +1,10 @@
 ﻿@model Meet_and_Copmete_Capstone.Models.Event
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detail";
 }
 
-<h1>Details</h1>
+<h1>Detail</h1>
 
 <div>
     <h4>Event</h4>
@@ -64,31 +64,17 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ZipCode)
         </dd>
-       
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EventPlaner)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EventPlannerId)
+            @Html.DisplayFor(model => model.EventPlaner.FirstName)
         </dd>
     </dl>
 </div>
-<div class="row">
-    @foreach(var eventee in ViewBag.people)
-    {
-        <div class="col-12">
-            <div>@($"Name: {eventee.FirstName} {eventee.LastName}")</div>
-            <div>
-                <a asp-controller="EventPlaners" asp-action="EventeeProfile" asp-route-id="@eventee.Id">Details</a>
-            </div>
-            <div>@($"Distance to event: {eventee.Distance} meters")</div>
-            <a asp-controller="EventPlaners" asp-action="SendInvite" className="btn btn-primary" asp-route-eventid=@Model.Id asp-route-target=@eventee.Id>Invite</a> 
-        </div>
-    }
-</div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-controller="EventPlaners" asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 Map:
 <br />
@@ -117,3 +103,4 @@ Map:
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.APIkeys&callback=initMap&libraries=&v=weekly" async>
 </script>
+

@@ -17,15 +17,21 @@ namespace Meet_and_Copmete_Capstone.Models
         public string LoginEmail { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Address { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
         public int ZipCode { get; set; }
         public string Bio { get; set; }
-
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+        
+        [NotMapped]
+        public int Distance { get; set; }
     }
 }
 

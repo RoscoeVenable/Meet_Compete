@@ -82,7 +82,7 @@ namespace Meet_and_Copmete_Capstone.Controllers
             string eventAddr = "";
             string[] eventCoords = GetCoordinates(eventAddr);
 
-            List<string[]> eventeeCoordinates = await _context.Eventee.Select(e => GetCoordinates(e.Address)).ToListAsync();
+            List<string[]> eventeeCoordinates = await _context.Eventee.Select(e => GetCoordinates(e.Street + e.City + e.State)).ToListAsync();
             List<string> distance = new List<string>();
             foreach (var pair in eventeeCoordinates)
             {
@@ -131,27 +131,6 @@ namespace Meet_and_Copmete_Capstone.Controllers
                 lng2 = (string)jobject["results"][0]["geometry"]["location"]["lng"];
                 lat2 = (string)jobject["results"][0]["geometry"]["location"]["lat"];
             }
-
-            //List<string[]> eventCoordinates = new List<string[]>();
-            //string userLng;
-            //string userLat;
-
-            //string firstPart = "https://maps.googleapis.com/maps/api/distancematrix/json?";
-            //string apiPart = $"&key={Secrets.APIKEY}";
-            //string origins = "origins=";
-            //string destinations = "&destinations=";
-            //for (int i = 0; i < eventCoordinates.Count; i++)
-            //{
-            //    if (i != 0) {
-            //        origins += $"|{eventCoordinates[i][0]}, {eventCoordinates[i][1]}";
-            //        destinations += $"|{eventCoordinates[i][0]}, {eventCoordinates[i][1]}";
-            //    } else
-            //    {
-            //        origins += $"{eventCoordinates[i][0]}, {eventCoordinates[i][1]}";
-            //        destinations += $"{eventCoordinates[i][0]}, {eventCoordinates[i][1]}";
-            //    }
-            //}
-            
 
             string distanceRequest = $"https://maps.googleapis.com/maps/api/distancematrix/json?origins={lat1},{lng1}&destinations={lat2},{lng2}&key={Secrets.APIKEY}";
             client = new HttpClient();
@@ -292,6 +271,24 @@ namespace Meet_and_Copmete_Capstone.Controllers
         public ActionResult Upload([FromForm] IFormFile file)
         {
             return Ok();
+        }
+        public ActionResult SendInvite(int target, int eventid)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> EventeeProfile(int id)
+        {
+           
+
+            var eventee = await _context.Eventee
+                .Include(e => e.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (eventee == null)
+            {
+                return NotFound();
+            }
+
+            return View(eventee);
         }
     }
 }

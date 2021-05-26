@@ -1,22 +1,14 @@
 ﻿@model IEnumerable<Meet_and_Copmete_Capstone.Models.Event>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "WarhammerEvents";
 }
 
-<h1>Events Near Me</h1>
+<h1>WarhammerEvents</h1>
 
-<div class="dropdown">
-    <button class="btn btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown">
-        Current Events
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-        <li><a asp-controller="Eventees" asp-action="BasketBallEvents">Basket Ball Games</a></li>
-        <li><a asp-controller="Eventees" asp-action="DnDEvents">DnD Events</a></li>
-        <li><a asp-controller="Eventees" asp-action="WarhammerEvents">Warhammer 40K</a></li>
-    </ul>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -24,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Street)
+                @Html.DisplayNameFor(model => model.City)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                @Html.DisplayNameFor(model => model.Street)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.State)
@@ -60,10 +52,10 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Street)
+                @Html.DisplayFor(modelItem => item.City)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City)
+                @Html.DisplayFor(modelItem => item.Street)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.State)
@@ -87,22 +79,9 @@
                 @Html.DisplayFor(modelItem => item.EventPlaner.FirstName)
             </td>
             <td>
-            <a asp-controller="Event" asp-action="Detail" asp-route-id="@item.Id">Details</a> |
+                <a asp-controller="Event" asp-action="Details" asp-route-id="@item.Id">Details</a> |
             </td>
         </tr>
 }
     </tbody>
 </table>
-@*<div class="row">
-    @foreach (var invite in ViewBag.invites)
-    {
-        <div class="col-12">
-            <div>@($"Name: {invite.events.eventplaner.FirstName} {invite.events.eventplaner.LastName}")</div>
-            
-            @if (true)
-            {
-                <a asp-action="AcceptInvite" className="btn btn-primary" asp-route-target=@invite.Id>Invite</a>
-            }
-        </div>
-    }
-</div>*@

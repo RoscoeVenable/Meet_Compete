@@ -26,7 +26,7 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DayOfWeek")
@@ -41,7 +41,19 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     b.Property<string>("Extras")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Time")
@@ -96,10 +108,10 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("Bio")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Bio")
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -111,7 +123,19 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
                     b.Property<string>("LoginEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ZipCode")
@@ -122,6 +146,31 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     b.HasIndex("IdentityUserId");
 
                     b.ToTable("Eventee");
+                });
+
+            modelBuilder.Entity("Meet_and_Copmete_Capstone.Models.Invite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventeeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("EventeeId");
+
+                    b.ToTable("Invite");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -153,15 +202,15 @@ namespace Meet_and_Copmete_Capstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c663873e-fa7c-4396-9f60-cf079ed53e67",
-                            ConcurrencyStamp = "f5233196-5865-4188-8ad7-a4a7ae9505e7",
+                            Id = "41612494-a3c5-4c42-a702-c98991751260",
+                            ConcurrencyStamp = "94dc8e47-cdbb-4161-8973-945fbda3ebff",
                             Name = "Eventee",
                             NormalizedName = "EVENTEE"
                         },
                         new
                         {
-                            Id = "ebb481b0-5b84-4be8-8267-d8ef6d8121a7",
-                            ConcurrencyStamp = "7d859c5d-2208-459e-a04e-f50c79aa5a90",
+                            Id = "dd17ccfa-7f18-4473-a780-35c1fa708cdb",
+                            ConcurrencyStamp = "dd841d8d - 6949 - 4e5d - 83bf - 38e4ea6a8158",
                             Name = "EventPlaner",
                             NormalizedName = "EVENTPLANER"
                         });
@@ -363,6 +412,25 @@ namespace Meet_and_Copmete_Capstone.Migrations
                         .HasForeignKey("IdentityUserId");
 
                     b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("Meet_and_Copmete_Capstone.Models.Invite", b =>
+                {
+                    b.HasOne("Meet_and_Copmete_Capstone.Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Meet_and_Copmete_Capstone.Models.Eventee", "Eventee")
+                        .WithMany()
+                        .HasForeignKey("EventeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Eventee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

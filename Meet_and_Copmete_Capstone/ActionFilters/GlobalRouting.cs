@@ -23,7 +23,7 @@ namespace Meet_and_Copmete_Capstone.ActionFilters
                 if (_claimsPrincipal.IsInRole("Eventee"))
                 {
                     context.Result = new RedirectToActionResult("Index",
-                    "Eventee", null);
+                    "Eventees", null);
                 }
                 else if (_claimsPrincipal.IsInRole("EventPlaner"))
                 {

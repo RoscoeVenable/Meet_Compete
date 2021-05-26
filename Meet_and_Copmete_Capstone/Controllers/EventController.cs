@@ -17,6 +17,7 @@ namespace Meet_and_Copmete_Capstone.Controllers
     public class EventController : Controller
     {
         private readonly ApplicationDbContext _context;
+        Geocoding geocoding = new Geocoding();
 
         public EventController(ApplicationDbContext context)
         {
@@ -25,6 +26,7 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // GET: EventController
         public ActionResult Index()
         {
+            ViewData["APIkeys"] = Secrets.APIKEY;
             return View();
             //if (_context.UserRoles = "EventPlanner")
             //{
@@ -47,16 +49,28 @@ namespace Meet_and_Copmete_Capstone.Controllers
         }
 
         // GET: EventController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            ViewData["APIkeys"] = Secrets.APIKEY;
+            var eventees = _context.Eventee.ToList();
+            var events = _context.Event.Find(id);
+            ViewBag.people = await geocoding.GetNearbyPeople(eventees, events);
+            
+            return View(events);
+        }
+        public IActionResult Detail(int id)
+        {
+          var events = _context.Event.Find(id);
+
+            return View(events);
         }
 
         // GET: EventController/Create
         public ActionResult EventCreate()
         {
+            ViewData["APIkeys"] = Secrets.APIKEY;
             List<EventTypes> eventTypes = new List<EventTypes>();
-            eventTypes.Add(new EventTypes { Value = "D&D", Text = "D&D", Selected = true});
+            eventTypes.Add(new EventTypes { Value = "DnD", Text = "DnD", Selected = true});
             eventTypes.Add(new EventTypes { Value = "Basketball", Text = "Basketball", Selected = false });
             eventTypes.Add(new EventTypes { Value = "Warhammer", Text = "Warhammer", Selected = false });
             ViewBag.EventTypes = new SelectList(eventTypes, "Value", "Text");
@@ -66,16 +80,17 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // POST: EventController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EventCreate(Event events)
+        public async Task<IActionResult> EventCreate(Event events)
         {
             try
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var eventPlannerLoggedIn = _context.EventPlaner.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-
                 events.EventPlannerId = eventPlannerLoggedIn.Id;
-                _context.Add(events);
-                _context.SaveChanges();
+
+                await geocoding.GetGeoCoding(events);
+                await _context.AddAsync(events);
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "EventPlaners");
             }
             catch
@@ -85,17 +100,19 @@ namespace Meet_and_Copmete_Capstone.Controllers
         }
 
         // GET: EventController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
-            Event events = _context.Event.Where(e => e.Id == id).SingleOrDefault();
+            ViewData["APIkeys"] = Secrets.APIKEY;
+            var events = _context.Event.Find(id);
             return View(events);
         }
 
         // POST: EventController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Event events)
+        public async Task<IActionResult> Edit(Event events)
         {
+            
             try
             {
                 
@@ -132,5 +149,6 @@ namespace Meet_and_Copmete_Capstone.Controllers
                 return View();
             }
         }
+
     }
 }

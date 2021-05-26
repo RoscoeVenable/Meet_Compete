@@ -28,3 +28,4 @@ function submitImage(e) {
         }
     });
 }
+

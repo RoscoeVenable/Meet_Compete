@@ -17,6 +17,7 @@ namespace Meet_and_Copmete_Capstone.Controllers
     public class EventeesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        Geocoding geocoding = new Geocoding();
 
         public EventeesController(ApplicationDbContext context)
         {
@@ -65,16 +66,24 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LoginEmail,FirstName,LastName,ZipCode,IdentityUserId")] Eventee eventee)
+        public async Task<IActionResult> Create(Eventee eventees)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                _context.Add(eventee);
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                eventees.IdentityUserId = userId;
+
+                await geocoding.GetGeoCodingEventee(eventees);
+                _context.Add(eventees);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index"); ;
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", eventee.IdentityUserId);
-            return View(eventee);
+            catch
+            {
+                return View();
+            }
+            
         }
 
         // GET: Eventees/Edit/5
@@ -99,7 +108,7 @@ namespace Meet_and_Copmete_Capstone.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LoginEmail,FirstName,LastName,ZipCode,IdentityUserId")] Eventee eventee)
+        public async Task<IActionResult> Edit(int id, Eventee eventee)
         {
             if (id != eventee.Id)
             {
@@ -163,6 +172,48 @@ namespace Meet_and_Copmete_Capstone.Controllers
         private bool EventeeExists(int id)
         {
             return _context.Eventee.Any(e => e.Id == id);
+        }
+        public IActionResult DnDEvents()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var eventeeLoggedIN = _context.Eventee.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+
+            var DnDEvents = _context.Event.Where(e => e.EventType == "DnD").ToList();
+
+            return View(DnDEvents);
+        }
+        public IActionResult WarhammerEvents()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var eventeeLoggedIN = _context.Eventee.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+
+            var DnDEvents = _context.Event.Where(e => e.EventType == "Warhammer").ToList();
+
+            return View(DnDEvents);
+        }
+        public IActionResult BasketBallEvents()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var eventeeLoggedIN = _context.Eventee.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+
+            var DnDEvents = _context.Event.Where(e => e.EventType == "Basketball").ToList();
+
+            return View(DnDEvents);
+        }
+        public ActionResult AcceptInvite(int target)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> EventPlanerProfile(int id)
+        {
+            var eventplaner = await _context.EventPlaner
+                .Include(e => e.IdentityUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (eventplaner == null)
+            {
+                return NotFound();
+            }
+            return View(eventplaner);
         }
     }
 }
