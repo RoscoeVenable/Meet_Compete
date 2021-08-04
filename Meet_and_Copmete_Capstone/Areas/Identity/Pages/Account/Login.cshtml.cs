@@ -81,6 +81,20 @@ namespace Meet_and_Copmete_Capstone.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                //try
+                //{
+                //    var user = _userManager.Users.Where(u => u.Email.Equals(Input.Email)).Single(); // where db is ApplicationDbContext instance
+                //    var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                //    if (result.Succeeded)
+                //    {
+                //        _logger.LogInformation("User logged in.");
+                //        return LocalRedirect(returnUrl);
+                //    }
+                //}
+                //catch (InvalidOperationException)
+                //{
+                //    // the user is not exist
+                //}
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {

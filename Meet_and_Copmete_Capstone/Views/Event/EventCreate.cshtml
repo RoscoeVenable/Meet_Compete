@@ -46,14 +46,14 @@
                 <span asp-validation-for="DayOfWeek" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Extras" class="control-label"></label>
-                <input asp-for="Extras" class="form-control" />
-                <span asp-validation-for="Extras" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Time" class="control-label"></label>
                 <input asp-for="Time" class="form-control" />
                 <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Extras" class="control-label"></label>
+                <input asp-for="Extras" class="form-control" />
+                <span asp-validation-for="Extras" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EventType" class="control-label"></label>
@@ -70,6 +70,7 @@
 <div>
     <a asp-controller="EventPlaners" asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
